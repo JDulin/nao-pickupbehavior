@@ -1,0 +1,88 @@
+\documentclass[12pt]{report}
+
+\begin{document}
+
+\title{Humanoid Robotics NAO Project}
+\author{John Dulin}
+
+\chapter{Weekly Goals}
+
+\indent
+This is an outline of the goals I intend to meet for the last 5 weeks of my Summer At The Edge internship, working on the
+Humanoid Robotics with NAO Project.  Because of the lack of progress made in the first five weeks, these goals are definitive and
+ambitious compared to the last five, but are still possible.  If solutions to any of these challenges are not successfully implemented 
+by the end of the project, then a technical paper outlining the problems encountered, the methods I used to try to solve the problems, 
+and specific models of other possible solutions will be made for any future work by TecEdge students on the NAO.
+
+\chapter{Dates and Goals}
+
+\section{July 20 - Finding, Tracking, and Grasping}
+
+\indent
+This will be a relatively simple behavior that uses the ALRedBallTracker to find a 3.5 centimeter red ball
+(transformed from the 6 centimeter projection that ALRedBallDetection assumes) and approach it and pick it up using
+the ALMotion library, specifically using the Whole Body generalized inverse kinematics solver to pick the ball up.
+
+This will assume a stationary red ball and that the robot will not have to move to search for the ball.
+The ball will be in plain view, elevated above the ground, somewhere within 5 feet of the robot and the range of its head's scanning motion. 
+ So, the robot will scan an area with its head looking for the ball, turning and approaching the ball once one is detected. Then, it will activate
+Whole Body motion to smoothly and safely pick it up.  Right now Whole Body motion cannot have NAO's hands reach the ground, although it's possible
+with a custom module.  That is not our priority though at the moment.
+
+
+\section{July 27 - Searching}
+
+
+\indent
+By July 27 I intend to have built a method for NAO to search an open area for a red ball not immediately in its field of view.  This will build on the head
+scanning motion and pickup method built last week.  By finding ideal rates of walking and side to side head turning, NAO should be able to 
+quickly scan an open space.  By default, the behavior will assume a rectangular or square space to search (at least at first) whose size can be 
+defined as a program parameter.  Knowing the space size, I should be able to define walking paths for NAO that optimize his hunt, although the
+rate of the search will be limited by how well ALRedBallTracker can identify balls while walking and turning the head.  Once a ball is spotted,
+NAO will just go ahead and follow the algorithm built last week.  Searching in more complex, irregular environments can be done by using the sonar 
+sensors and tracing NAO's position in absolute space  more rigorously, but that is not our priority and would be cut short by the sonar's voracious thirst
+for power from the Li-Ion battery.
+
+
+\section{August 3 - Tools}
+
+\indent
+With some basic functionality built, we have two stated goals for the project: make the challenge we are attacking more complex and meaningful by 
+teaching NAO to collect a set of several balls in space, and then challenging NAO to manipulate a tool to make its job easier, like a wagon
+or basket that holds what it finds.  I think we should focus on getting NAO to use a container, because it is a more challenging
+problem, and one specifically for humanoids.  The wagon would be the most impressive tool to use because NAO would always have to think about where it
+was and navigate with it, but it may not be possible to use in this time frame.  NAO's walking motion precariously balances him with the help of his 
+arm motion and to have a V3.3 NAO use one of its arms to pull a wagon while walking would probably require a whole new walking method, in addition 
+to the computer vision algorithms needed to teach NAO about the wagon and its handle.  So this week I would focus on determining if NAO pulling the wagon
+was practical, and then build functionality for either pulling a wagon or carrying a basket.  The basket would probably have to be custom made:
+light, strong enough to hold several ping-pong balls, and with a firm handle that is easily distinguishable.  Maybe even out of something like construction
+paper.  This may be extra hard because the NAO's right hand only has 2 working fingers.
+
+This problem would involve building a computer vision module specifically to see the handle of the container, modifying the pickup algorithm to
+consider the container before and after grabbing a ball, and thinking about the location of the wagon in space.  This day I would like to show
+Dr. Lee what approach I will be taking to the problem, why, and have conducted some simple tests on my computer vision approach to talk about. 
+
+
+\section{August 10 - Look What I Can Do!}
+
+\indent
+The goal for August 10th is to have a NAO robot that can autonomously search a space for a single red ball, pick it up and place it in a container
+(wagon or basket), and say "Look what I can do!"  This will require the robot to recognize the handle of the container several times (picking it up
+at the start of the behavior and possibly after it picks up a ball and sets it down.), pick it up, and then execute all of its other functions properly.
+This will be hard because as the program is worked on more and more complications to the original behavior may arise from throwing the container into the
+mix.  If the program does not work, then I will show Dr. Lee a full analysis of the problems I faced in my work and what others I predict, along with
+a set of possible technical solutions to each using the software tools at my disposal.  But hopefully that isn't necessary.
+
+
+\section{August 17 - Project Review and Bonus Points:  Dealing with Unexpected Events or a Full Set of Balls.}
+
+\indent
+Dr. Williams from the Discovery Lab would like all summer projects to present a poster, a 2 minute 57 second video, a 12 page technical paper, and
+a 37 slide presentation on their summer work at the August 14th project Open House.  If the project has met its milestones and I still have the robot, 
+then in the meantime I will work on adding functionality for collecting a set of 3-5 balls instead of just one, or, if that is not practical, polishing the
+program I already have by attempting to fix any bugs it has and accounting for unexpected events such as a dropped ball or handle, a moving ball,
+or an arbitrary object that NAO has to learn to pickup.  Either way, I will compile everything I have learned over the summer into the presentation
+forms asked for by Dr. Williams and a more concise version for Dr. Lee, so we can talk about the project's successes and failures.
+
+
+\end{document}

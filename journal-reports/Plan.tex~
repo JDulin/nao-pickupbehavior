@@ -1,0 +1,54 @@
+\documentclass{article}
+\title{Pickup Behavior Development Schedule}
+\author{John Dulin}
+\date{May 2012}
+\title{Summer at the Edge 2012 Research Project: Humanoid Robotics with the NAO Robot}
+
+\begin{document}
+\maketitle
+
+The goal of my project is to develop a behavior for the NAO robot that will let it search for and pick up an object in
+an open environment.  This will require combining the robot's funcitonality in computer vision, control, and parallel
+processing.  The entire project will be based on the NAOqi framework and NAO API from Aldebaran-Robotics.
+The coding should play out in several stages, and I hope to iterate it through a development that allows the
+construction of simpler, modular behaviors that can be pieced together to make the more complex application.
+
+\section{Red Ball Pickup}
+Have the NAO identifying and picking up red balls.  Matt Scherrick has sample code (unoptimized) that did just this.  This application should let NAO pickup a ball from different heights (floor to the height of his head), and should work relatively quickly.  Because the ALRedBallDetection and ALRedBallTracker modules already exist in the NAO API, we will use the red balls as a proxy throughout development for more complicated and random objects later on.
+
+\section{Movement and Red Ball Pickup}
+String more complicated motions together to get the NAO to a ball out of its reach and pick it up.  This should be a good demonstration of my progress.
+
+\section{Wagon Pull}
+Define how the NAO will pull a wagon.  This will require analysis of the NAO's joints and power to find out how he can identify and grab the wagon's handle and then walk with it practically.  This may be scratched if the task becomes too time consuming or difficult.  At this point, the application would not worry about searching for or picking up objects.
+
+\section{Searching Algorithm}
+Develop an algorithm for the NAO that lets it efficiently search for and identify objects (red balls at this stage) not immediately in its view.  I'll have to consider that the robot will ultimately be
+bringing a wagon along.   
+
+\section{Combine Wagon Pulling and Ball Pickup}
+Have the NAO go to a red ball, pick it up, and put it in the wagon, all while pulling the wagon along.  
+
+\section{Combine Searching, Wagon Pulling, and Ball Pickup}
+Can the NAO's searching algorithm be applied while it is pulling the wagon?  The NAO should search for a red ball not immediately in its field of view, identify it, pick it up, and place it in the wagon.
+
+\section{Apply the Searching Algorithm to a Set of Balls}
+Combine the pickup algorithm and searching algorithm in a way that lets the robot search for numerous balls not in its field of view.  It should keep track of how many balls it is searching for, how many
+it has found, and be able to move efficiently from finding one ball to looking for another.  Picking up is not necessary.
+
+\section{Search for a Set of Balls While Pulling the Wagon}
+Repeat above with the wagon.
+
+\section{The Complete Behavior}
+The robot should be able to pull the wagon around the room while searching for an arbitrary set of red balls.  When a red ball is found, NAO should pick up the red ball and place it in the wagon.  After
+all of the red balls are found, NAO should declare that the behavior is over before it ends.  Ideally, all of the red balls will be in the wagon. 
+
+\section{Bonus Points}
+- Error detection and correction.  NAO should realize when it mistakes something else for a ball, drops a ball, a ball doesn't make it into the wagon, it loses track of/drops the wagon handle,
+and the search algorithm takes him way off track of where he is supposed to go.
+- Learning new objects to search.  Instead of searching for red balls during the pickup behavior, NAO learns new objects from a series of objects shown to him by humans when the behavior starts.  This may
+require more advanced vision algorithms and pikcup behaviors.
+- QR-Coded blocks or more complicated object pickup behavior.  The red balls are replaced by more complicated objects like QR-coded paper blocks as what NAO is collecting.  
+- Voice control of the behavior.  NAO verbally is told how many objects he is looking for, or what he is looking for it the items are already in his vision recognition library.
+- Remote operation of the code.
+\end{document}
